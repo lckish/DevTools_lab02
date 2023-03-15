@@ -7,7 +7,7 @@ namespace MSBuildCustomTasks
 {
 	public class IncrementBuild : Microsoft.Build.Utilities.Task
 	{
-		private string _csprojFileName = "E:\\Projects\\1mon\\DevTools_lab02\\PowerCollections\\PowerCollections\\PowerCollections";
+		private string _csprojFileName;
 
 		[Required]
 		public string CsprojFileName
