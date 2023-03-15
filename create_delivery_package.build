@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <UsingTask TaskName="MSBuildCustomTasks.IncrementBuild" AssemblyFile="MSBuildCustomTasks\MSBuildCustomTasks\bin\Debug\netstandard2.0\MSBuildCustomTasks.dll" />
+        
+    <PropertyGroup>
+        <Configuration>Release</Configuration>
+        <IncludeSourceFiles>true</IncludeSourceFiles>
+        <IgnoreTests>false</IgnoreTests>
+    </PropertyGroup>
+
+    <Target Name="Pack">
+        <Exec Command="dotnet test" WorkingDirectory="PowerCollections\PowerCollections.Tests" ContinueOnError="$(IgnoreTests)" />
+    
+        <IncrementBuild CsprojFileName="PowerCollections\PowerCollections\PowerCollections.csproj">
+            <Output TaskParameter="Version" PropertyName="Version" />
+        </IncrementBuild>
+
+        <Exec Command="dotnet pack PowerCollections\PowerCollections\PowerCollections.csproj -c $(Configuration) -p:PackageVersion=$(Version)" />
+        <Exec Command="docfx docfx_project\docfx.json -t statictoc" />
+
+        <ItemGroup>
+            <Package Include="PowerCollections\PowerCollections\bin\$(Configuration)\lckish.PowerCollections.$(Version).nupkg" />
+            <Docs Include="docfx_project\_site\**\*.*" />
+            <SourceFiles Include="PowerCollections\**"
+                Exclude="PowerCollections\.vs\**; PowerCollections\*\bin\**;
+                    PowerCollections\*\obj\**; PowerCollections\*\TestResults\**"
+                Condition="$(IncludeSourceFiles) == 'true'" />
+        </ItemGroup>
+
+        <Copy SourceFiles="@(Package)" DestinationFolder="temp\bin" />
+        <Copy SourceFiles="@(Docs)" DestinationFolder="temp\doc\%(RecursiveDir)" />
+        <Copy SourceFiles="@(SourceFiles)" DestinationFolder="temp\src\%(RecursiveDir)" />
+        
+        <ZipDirectory SourceDirectory="temp"
+            DestinationFile="lckish.PowerCollections_$([System.DateTime]::Now.ToString(yyyyMMdd))_$(Version).zip"
+            Overwrite="true" />
+        <RemoveDir Directories="temp" />
+    </Target>
+</Project>
