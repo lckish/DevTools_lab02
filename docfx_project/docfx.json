@@ -3,8 +3,11 @@
     {
       "src": [
         {
-          "files": [
-            "src/**.csproj"
+          "files": [ "**.csproj" ],
+          "src": "../PowerCollections/PowerCollections",
+          "exclude": [
+            "**/bin/**",
+            "**/obj/**"
           ]
         }
       ],
