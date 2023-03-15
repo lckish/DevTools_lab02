@@ -5,7 +5,7 @@ using Microsoft.Build.Utilities;
 
 namespace MSBuildCustomTasks
 {
-	public class IncrementBuild : Microsoft.Build.Utilities.Task
+	public class IncrementBuild : Task
 	{
 		private string _csprojFileName;
 
