@@ -1,8 +1,8 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
-using System.Collections;
 using System.Linq;
 using System.Reflection;
+using Wintellect.PowerCollections;
 
 namespace PowerCollections.Tests
 {
