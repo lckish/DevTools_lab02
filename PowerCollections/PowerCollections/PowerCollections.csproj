@@ -5,7 +5,7 @@
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <Deterministic>false</Deterministic>
     <PackageId>lckish.PowerCollections</PackageId>
-    <VersionPrefix>0.0.2</VersionPrefix>
+    <VersionPrefix>0.0.3</VersionPrefix>
     <VersionSuffix>beta</VersionSuffix>
     <Authors>lckish</Authors>
     <Title>Wintellect.PowerCollections</Title>
