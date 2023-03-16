@@ -34,6 +34,11 @@
         <ZipDirectory SourceDirectory="temp"
             DestinationFile="lckish.PowerCollections_$([System.DateTime]::Now.ToString(yyyyMMdd))_$(Version).zip"
             Overwrite="true" />
+
+        <OnError ExecuteTargets="RemoveTempFiles" />
+    </Target>
+
+    <Target Name="RemoveTempFiles" AfterTargets="Pack">
         <RemoveDir Directories="temp" />
     </Target>
 </Project>
