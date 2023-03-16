@@ -1,0 +1,51 @@
+name: publish-and-release-nuget
+on: workflow_dispatch
+jobs:
+  pack-nuget:
+    runs-on: windows-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+    - name: Pack nuget
+      run: dotnet pack PowerCollections/PowerCollections/PowerCollections.csproj -c Release
+    - name: Archive artifacts
+      uses: actions/upload-artifact@v3
+      with:
+        name: package
+        path: PowerCollections\PowerCollections\bin\Release\*.nupkg
+
+  publish-nuget:
+    runs-on: windows-latest
+    needs: pack-nuget
+    steps:
+    - name: Download artifacts of pack-nuget
+      uses: actions/download-artifact@v3
+      with:
+        name: package
+        path: artifacts/
+    - name: Publish nuget package
+      run: dotnet nuget push artifacts\*.nupkg --api-key ${{ secrets.PUBLISH_NUGET_TOKEN }} --source https://nuget.pkg.github.com/lckish/index.json --skip-duplicate
+
+  release-nuget:
+    runs-on: windows-latest
+    needs: pack-nuget
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+    - name: Get version
+      id: getVersion
+      uses: mavrosxristoforos/get-xml-info@1.0
+      with:
+        xml-file: 'PowerCollections/PowerCollections/PowerCollections.csproj'
+        xPath: '//VersionPrefix'
+    - name: Download artifacts of pack-nuget
+      uses: actions/download-artifact@v3
+      with:
+        name: package
+        path: artifacts/
+    - name: Release nuget package
+      uses: ncipollo/release-action@v1
+      with:
+        artifacts: 'artifacts\*.nupkg'
+        tag: v${{ steps.getVersion.outputs.info }}
+        token: ${{ secrets.PUBLISH_NUGET_TOKEN }}
