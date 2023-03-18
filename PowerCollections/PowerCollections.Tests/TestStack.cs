@@ -4,7 +4,7 @@ using System.Collections;
 using System.Linq;
 using System.Reflection;
 
-namespace PowerCollections.Tests
+namespace Wintellect.PowerCollections.Tests
 {
     [TestClass]
     public class StackTests
