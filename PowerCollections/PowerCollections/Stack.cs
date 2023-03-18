@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
-namespace PowerCollections
+namespace Wintellect.PowerCollections
 {
     public class Stack<T> : IEnumerable<T>
     {
@@ -46,7 +46,7 @@ namespace PowerCollections
         }
 
         //Добавление элемента
-        internal void Push(T item)
+        public void Push(T item)
         {
             Items[count++] = item;
         }
