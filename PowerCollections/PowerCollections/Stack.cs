@@ -16,7 +16,7 @@ namespace Wintellect.PowerCollections
         }
 
         //Constructor
-        public Stack(int size)
+        public Stack(int size = 100)
         {
             Items = new T[size];
             Capacity = size;

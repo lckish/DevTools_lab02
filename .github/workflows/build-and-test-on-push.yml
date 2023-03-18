@@ -1,0 +1,17 @@
+name: build-and-test-on-push
+on: push
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Build app
+        run: dotnet build PowerCollections/PowerCollections
+  test:
+    runs-on: windows-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Test app
+        run: dotnet test PowerCollections/PowerCollections.Tests
