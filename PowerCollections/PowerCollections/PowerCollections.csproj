@@ -1,9 +1,17 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<TargetFramework>netstandard2.1</TargetFramework>
+		<TargetFramework>net6.0</TargetFramework>
 		<GenerateAssemblyInfo>false</GenerateAssemblyInfo>
 		<Deterministic>false</Deterministic>
+		<PackageId>lckish.PowerCollections</PackageId>
+		<VersionPrefix>0.0.2</VersionPrefix>
+		<VersionSuffix>beta</VersionSuffix>
+		<Authors>lckish</Authors>
+		<Title>Wintellect.PowerCollections</Title>
+		<Description>The Power Collections group of collection classes.</Description>
+		<Copyright>Copyright (c) 2004-2007, Wintellect</Copyright>
+		<RepositoryUrl>https://github.com/lckish/DevTools_lab02.git</RepositoryUrl>
 	</PropertyGroup>
 
 </Project>
